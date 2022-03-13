@@ -1,4 +1,4 @@
-package video
+package comic
 
 import (
 	"SomeTools/webpage"
@@ -10,8 +10,8 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name:  "video",
-		Usage: "下载视频",
+		Name:  "comic",
+		Usage: "下载漫画",
 		Action: func(c *cli.Context) error {
 			uri := ""
 			if c.NArg() > 0 {
@@ -23,8 +23,8 @@ func Command() *cli.Command {
 			}
 			var handler func(doc *goquery.Document, err error) error
 			switch u.Host {
-			case "spankbang.com":
-				handler = spankParser
+			case "e-hentai.org":
+				handler = eHentaiParser
 			default:
 				handler = defaultHandler
 			}
@@ -33,7 +33,7 @@ func Command() *cli.Command {
 	}
 }
 
-func defaultHandler(doc *goquery.Document, err error) error {
+func eHentaiParser(doc *goquery.Document, err error) error {
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func defaultHandler(doc *goquery.Document, err error) error {
 	return nil
 }
 
-func spankParser(doc *goquery.Document, err error) error {
+func defaultHandler(doc *goquery.Document, err error) error {
 	if err != nil {
 		return err
 	}

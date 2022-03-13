@@ -1,17 +1,20 @@
 package main
 
 import (
+	"SomeTools/comic"
 	"SomeTools/video"
-	"github.com/urfave/cli/v2"
 	"log"
 	"os"
 	"sort"
+
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
 	app := &cli.App{
 		Commands: []*cli.Command{
 			video.Command(),
+			comic.Command(),
 		},
 	}
 
